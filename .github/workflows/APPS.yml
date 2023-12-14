@@ -5,11 +5,11 @@ on:
       repo:
         description: repo
         required: true
-        default: 'https://github.com/liaofulong/Manifest-AutoUpdate'
+        default: 'https://github.com/BlankTMing/ManifestAutoUpdate'
     branches:
       - main
-  schedule:
-    - cron: '0 16 * * *'
+  #schedule:
+    #- cron: '0 */8 * * *'
 concurrency:
   group: wait
   cancel-in-progress: false
@@ -30,8 +30,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - run: |
-          git config --local user.name github-actions[bot]
-          git config --local user.email 83289881+github-actions[bot]@users.noreply.github.com
+          git config --local user.name AutoUpdate[bot]
+          git config --local user.email AutoUpdate[bot]@users.noreply.github.com
           python main.py -i -P -k ${{ secrets.KEY }}
-          python apps.py -r ${{ github.event.inputs.repo || 'https://github.com/liaofulong/Manifest-AutoUpdate' }} -o data
+          python apps.py -r ${{ github.event.inputs.repo || 'https://github.com/BlankTMing/ManifestAutoUpdate' }} -o data
           python push.py

@@ -69,14 +69,29 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - run: |
-          git config --local user.name github-actions[bot]
-          git config --local user.email 83289881+github-actions[bot]@users.noreply.github.com
+          git config --local user.name AutoUpdate[bot]
+          git config --local user.email AutoUpdate[bot]@users.noreply.github.com
       - if: ${{ env.KEY != '' }}
         run: python main.py -l ${{ github.event.inputs.level || 'INFO' }} -i -k ${{ secrets.KEY }} -P ${{ github.event.inputs.args }}
       - if: ${{ env.KEY == '' }}
         run: python main.py -l ${{ github.event.inputs.level || 'INFO' }} -i ${{ github.event.inputs.args }}
       - if: ${{ env.users != '' }}
-        run: python -c "import os;import json;import itertools;j=json.load(open('data/users.json'));j.update({u:[p,s] for u,p,s in itertools.zip_longest([i or None for i in (os.environ.get('users') or '').split(',')],[i or None for i in (os.environ.get('password') or '').split(',')],[i or None for i in (os.environ.get('ssfn') or '').split(',')]) if u});json.dump(j,open('data/users.json','w'))"
+        #如果用户存在且enable为false 密码或者ssfn 与新添加的不同这替换并修改enable为true，删除status
+        run: |
+           python -c "import os
+           import json
+           import itertools
+           j = json.load(open('data/users.json'))
+           us = json.load(open('data/userinfo.json'))
+           for u, p, s in itertools.zip_longest([i or None for i in (os.environ.get('users') or '').split(' ')],[i or None for i in (os.environ.get('password') or '').split(' ')],[i or None for i in (os.environ.get('ssfn') or '').split(' ')]):
+              if u:
+                  if u in j and u in us and not us[u]['enable'] and (j[u][0] != p or j[u][1] != s):
+                      us[u]['enable'] = True
+                      us[u].pop('status')
+                  j.update({u:[p, s]})
+           json.dump(us, open('data/userinfo.json', 'w'))
+           json.dump(j, open('data/users.json', 'w'))"
+        #run: python -c "import os;import json;import itertools;j=json.load(open('data/users.json'));j.update({u:[p,s] for u,p,s in itertools.zip_longest([i or None for i in (os.environ.get('users') or '').split(',')],[i or None for i in (os.environ.get('password') or '').split(',')],[i or None for i in (os.environ.get('ssfn') or '').split(',')]) if u});json.dump(j,open('data/users.json','w'))"
       - if: ${{ env.shared_secret != '' }}
         run: python -c "import os;import json;import itertools;j=json.load(open('data/2fa.json'));j.update({u:f for u,f in itertools.zip_longest([i or None for i in (os.environ.get('users') or '').split(',')],[i or None for i in (os.environ.get('shared_secret') or '').split(',')]) if u});json.dump(j,open('data/2fa.json','w'))"
       - if: ${{ env.UsersJson != '' }}

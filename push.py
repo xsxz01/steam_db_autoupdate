@@ -81,7 +81,8 @@ def push_data(repo=None):
     except git.exc.GitCommandError:
         pass
     try:
-        file_list = ['appinfo.json', 'userinfo.json', 'users.json', '2fa.json', 'apps.xlsx']
+        #添加push appuserlist.json文件到仓库
+        file_list = ['appinfo.json', 'userinfo.json', 'users.json', '2fa.json', 'apps.xlsx', 'appuserlist.json','Avalidaccount.json']
         for i in file_list:
             path = Path('data') / i
             if path.is_file():

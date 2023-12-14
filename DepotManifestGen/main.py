@@ -1,4 +1,5 @@
 import vdf
+import json
 import gevent
 import struct
 import os.path
@@ -7,13 +8,17 @@ import argparse
 import traceback
 from pathlib import Path
 from binascii import crc32
+from gevent.pool import Pool as GPool
+from steam.utils.web import make_requests_session
 from steam.core.cm import CMClient
 from steam.client import SteamClient
 from six import itervalues, iteritems
+from steam.enums import EResult, EOSType, EPersonaState
 from steam.client.cdn import CDNClient
 from steam.enums import EResult, EType
-from steam.exceptions import SteamError
+from steam.exceptions import SteamError,ManifestError
 from steam.protobufs.content_manifest_pb2 import ContentManifestSignature
+from steam.core.crypto import symmetric_decrypt, symmetric_decrypt_ecb
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-u', '--username', required=True)
@@ -65,7 +70,12 @@ class Result(dict):
         return bool(self.result)
 
 
-def get_manifest(cdn, app_id, depot_id, manifest_gid, remove_old=False, save_path=None, retry_num=10):
+def decrypt_manifest_gid_2(encrypted_gid, password):
+    return struct.unpack('<Q', symmetric_decrypt_ecb(encrypted_gid, password))[0]
+    
+def get_manifest(cdn, app_id,appinfo,package,manifest, remove_old=False, save_path=None, retry_num=10):
+    depot_id = str(manifest.depot_id)
+    manifest_gid = str(manifest.gid)
     if not save_path:
         save_path = Path().absolute()
     app_path = save_path / f'depots/{app_id}'
@@ -74,9 +84,6 @@ def get_manifest(cdn, app_id, depot_id, manifest_gid, remove_old=False, save_pat
         return Result(result=True, code=EResult.OK, app_id=app_id, depot_id=depot_id, manifest_gid=manifest_gid)
     while True:
         try:
-            manifest_code = cdn.get_manifest_request_code(app_id, depot_id, manifest_gid)
-            manifest = cdn.get_manifest(app_id, depot_id, manifest_gid, decrypt=False,
-                                        manifest_request_code=manifest_code)
             depot_key = cdn.get_depot_key(manifest.app_id, manifest.depot_id)
             break
         except KeyboardInterrupt:
@@ -85,8 +92,8 @@ def get_manifest(cdn, app_id, depot_id, manifest_gid, remove_old=False, save_pat
             if retry_num == 0:
                 return Result(result=False, code=e.eresult, app_id=app_id, depot_id=depot_id, manifest_gid=manifest_gid)
             retry_num -= 1
-            log.warning(f'{e.message} result: {str(e.eresult)}')
-            if e.eresult == EResult.AccessDenied:
+            log.warning(f'{e} result: {str(e.eresult)}')
+            if e.eresult == EResult.AccessDenied or e.eresult == EResult.Fail:
                 return Result(result=False, code=e.eresult, app_id=app_id, depot_id=depot_id, manifest_gid=manifest_gid)
             gevent.idle()
         except:
@@ -102,6 +109,29 @@ def get_manifest(cdn, app_id, depot_id, manifest_gid, remove_old=False, save_pat
     manifest.payload.mappings.sort(key=lambda x: x.filename.lower())
     if not os.path.exists(app_path):
         os.makedirs(app_path)
+    depotint = int(depot_id)
+    if os.path.isfile(app_path / 'config.json'):
+        with open(app_path / 'config.json') as f:
+            config = json.load(f)
+            config['dlcs'] = package['dlcs']
+            config['packagedlcs'] = package['packagedlcs']
+            if not depotint in config['depots']:
+                config['depots'].append(depotint)
+    else:
+        #添加配置文件config.json
+        json_str = f'''
+            {{
+            "appId": {app_id},
+            "depots": [{depotint}],
+            "dlcs": [],
+            "packagedlcs": []
+            }}'''
+        config = json.loads(json_str)
+        config['dlcs'] = package['dlcs']
+        config['packagedlcs'] = package['packagedlcs']
+    if not os.path.isfile(app_path / 'appinfo.vdf'):
+        with open(app_path / 'appinfo.vdf', 'w', encoding='utf-8') as f:
+            vdf.dump(appinfo, f, pretty=True)
     if os.path.isfile(app_path / 'config.vdf'):
         with open(app_path / 'config.vdf') as f:
             d = vdf.load(f)
@@ -118,11 +148,14 @@ def get_manifest(cdn, app_id, depot_id, manifest_gid, remove_old=False, save_pat
                     file.unlink(missing_ok=True)
                     delete_list.append(file.name)
     buffer = manifest.payload.SerializeToString()
+
     manifest.metadata.crc_clear = crc32(struct.pack('<I', len(buffer)) + buffer)
     with open(manifest_path, 'wb') as f:
         f.write(manifest.serialize(compress=False))
     with open(app_path / 'config.vdf', 'w') as f:
         vdf.dump(d, f, pretty=True)
+    with open(app_path / 'config.json', 'w') as f:
+        json.dump(config, f)
     return Result(result=True, code=EResult.OK, app_id=app_id, depot_id=depot_id, manifest_gid=manifest_gid,
                   delete_list=delete_list)
 
@@ -167,8 +200,8 @@ class MySteamClient(SteamClient):
         result = SteamClient.relogin(self)
         if result == EResult.InvalidPassword and self.login_key_path:
             self.login_key_path.unlink(missing_ok=True)
-        return result
-
+        return result   
+    
     def __setattr__(self, key, value):
         SteamClient.__setattr__(self, key, value)
         if key == 'username':
@@ -187,30 +220,211 @@ class MySteamClient(SteamClient):
 
 class MyCDNClient(CDNClient):
     _LOG = logging.getLogger('MyCDNClient')
-    packages_info = None
+    def __init__(self, client):
+        """CDNClient allows loading and reading of manifests for Steam apps are used
+        to list and download content
 
+        :param client: logged in SteamClient instance
+        :type  client: :class:`.SteamClient`
+        """
+        self.gpool = GPool(8)            #: task pool
+        self.steam = client              #: SteamClient instance
+        if self.steam:
+            self.cell_id = self.steam.cell_id
+
+        self.web = make_requests_session()
+        self.depot_keys = {}             #: depot decryption keys
+        self.manifests = {}              #: CDNDepotManifest instances
+        self.app_depots = {}             #: app depot info
+        self.beta_passwords = {}         #: beta branch decryption keys
+        self.licensed_app_ids = set()    #: app_ids that the SteamClient instance has access to
+        self.licensed_depot_ids = set()  #: depot_ids that the SteamClient instance has access to
+
+        if not self.servers:
+            self.fetch_content_servers()
+
+        #self.load_licenses()
+
+    def has_license_for_depot(self, depot_id):
+        """ Check if there is license for depot
+
+        :param depot_id: depot ID
+        :type  depot_id: int
+        :returns: True if we have license
+        :rtype: bool
+        """
+        if depot_id in self.licensed_depot_ids:
+            return True
+        else:
+            return False
+            
     def load_licenses(self):
         """Read licenses from SteamClient instance, required for determining accessible content"""
         self.licensed_app_ids.clear()
         self.licensed_depot_ids.clear()
-
+        app_id_list = []
         if self.steam.steam_id.type == EType.AnonUser:
             packages = [17906]
         else:
             if not self.steam.licenses:
                 self._LOG.debug("No steam licenses found on SteamClient instance")
-                return
+                return app_id_list
 
             packages = list(map(lambda l: {'packageid': l.package_id, 'access_token': l.access_token},
                                 itervalues(self.steam.licenses)))
-
-        self.packages_info = self.steam.get_product_info(packages=packages)['packages']
-
-        for package_id, info in iteritems(self.packages_info):
+        #改在初始化时获取app_id_list
+        for package_id, info in iteritems(self.steam.get_product_info(packages=packages,timeout=30)['packages']):
+            if 'depotids' in info and info['depotids'] and info['billingtype'] in BillingType.PaidList:
+                app_id_list.extend(list(info['appids'].values()))
             self.licensed_app_ids.update(info['appids'].values())
             self.licensed_depot_ids.update(info['depotids'].values())
+        return app_id_list
+
+    def get_app_depot_info(self, app_id):
+        if app_id not in self.app_depots:
+            self.app_depots[app_id] = self.steam.get_product_info([app_id],timeout=30)['apps'][app_id].get('depots',{})
+        return self.app_depots[app_id]
+
+    def get_manifest_request_code(self, app_id, depot_id, manifest_gid, branch='public', branch_password_hash=None):
+        body = {
+            "app_id":      int(app_id),
+            "depot_id":    int(depot_id),
+            "manifest_id": int(manifest_gid),
+        }
+
+        if branch and branch.lower() != 'public':
+            body['app_branch'] = branch
+
+            if branch_password_hash:
+                body['branch_password_hash'] = branch_password_hash
+
+        resp = self.steam.send_um_and_wait(
+            'ContentServerDirectory.GetManifestRequestCode#1',
+            body,
+            timeout=30,
+        )
+
+        if resp is None or resp.header.eresult != EResult.OK:
+                raise SteamError("Failed to get manifest code for %s, %s, %s" % (app_id, depot_id, manifest_gid),
+                                 EResult.Timeout if resp is None else EResult(resp.header.eresult))
+
+        return resp.body.manifest_request_code
+        
+    def get_manifests(self, app_id, branch='public', password=None, filter_func=None, decrypt=False):
+        depots = self.get_app_depot_info(app_id)
+        manifests = []
+        if not depots:
+            return manifests
+        is_enc_branch = False
+
+        if branch not in depots.get('branches', {}):
+            return manifests
+        elif int(depots['branches'][branch].get('pwdrequired', 0)) > 0:
+            is_enc_branch = True
+
+            if (app_id, branch) not in self.beta_passwords:
+                if not password:
+                    raise SteamError("Branch %r requires a password" % branch)
+
+                result = self.check_beta_password(app_id, password)
+
+                if result != EResult.OK:
+                    raise SteamError("Branch password is not valid. %r" % result)
+
+                if (app_id, branch) not in self.beta_passwords:
+                    raise SteamError("Incorrect password for branch %r" % branch)
+
+        def async_fetch_manifest(
+            app_id, depot_id, manifest_gid, decrypt, depot_name, branch_name, branch_pass
+        ):
+            try:
+                manifest_code = self.get_manifest_request_code(
+                    app_id, depot_id, int(manifest_gid), branch_name, branch_pass
+                )
+            except SteamError as exc:
+                return ManifestError("Failed to acquire manifest code", app_id, depot_id, manifest_gid, exc)
+
+            try:
+                manifest = self.get_manifest(
+                    app_id, depot_id, manifest_gid, decrypt=decrypt, manifest_request_code=manifest_code
+                )
+            except Exception as exc:
+                return ManifestError("Failed download", app_id, depot_id, manifest_gid, exc)
+
+            manifest.name = depot_name
+            return manifest
+
+        tasks = []
+        shared_depots = {}
+
+        for depot_id, depot_info in iteritems(depots):
+            if not depot_id.isdigit():
+                continue
+
+            depot_id = int(depot_id)
+
+            # if filter_func set, use it to filter the list the depots
+            if filter_func and not filter_func(depot_id, depot_info):
+                continue
+
+            # if we have no license for the depot, no point trying as we won't get depot_key
+            if not self.has_license_for_depot(depot_id):
+                self._LOG.debug("No license for depot %s (%s). Skipped",
+                                repr(depot_info.get('name', depot_id)),
+                                depot_id,
+                                )
+                continue
+
+            # accumulate the shared depots
+            if 'depotfromapp' in depot_info:
+                shared_depots.setdefault(int(depot_info['depotfromapp']), set()).add(depot_id)
+                continue
 
 
+            # process depot, and get manifest for branch
+            if is_enc_branch:
+                egid = depot_info.get('encryptedmanifests', {}).get(branch, {}).get('encrypted_gid_2')
+
+                if egid is not None:
+                    manifest_gid = decrypt_manifest_gid_2(unhexlify(egid),
+                                                          self.beta_passwords[(app_id, branch)])
+                else:
+                    manifest_gid = depot_info.get('manifests', {}).get('public',{}).get('gid')
+            else:
+                manifest_gid = depot_info.get('manifests', {}).get(branch,{}).get('gid')
+
+            if manifest_gid is not None:
+                tasks.append(
+                    self.gpool.spawn(
+                        async_fetch_manifest,
+                        app_id,
+                        depot_id,
+                        manifest_gid,
+                        decrypt,
+                        depot_info.get('name', depot_id),
+                        branch_name=branch,
+                        branch_pass=None, # TODO: figure out how to pass this correctly
+                  )
+              )
+
+        # collect results
+        
+
+        for task in tasks:
+            result = task.get()
+            if isinstance(result, ManifestError):
+                raise result
+            manifests.append(result)
+
+        # load shared depot manifests
+        for app_id, depot_ids in iteritems(shared_depots):
+            def nested_ffunc(depot_id, depot_info, depot_ids=depot_ids, ffunc=filter_func):
+                return (int(depot_id) in depot_ids
+                        and (ffunc is None or ffunc(depot_id,  depot_info)))
+
+            manifests += self.get_manifests(app_id, filter_func=nested_ffunc)
+
+        return manifests
 log = logging.getLogger('DepotManifestGen')
 
 
@@ -229,12 +443,13 @@ def main(args=None):
     if args.login_key:
         steam.login_key = args.login_key
     result = steam.relogin()
+    log.error(f'{args.credential_location} {args.sentry_path} {args.retry}')
     if result != EResult.OK:
         if args.cli:
             result = steam.cli_login(args.username, args.password)
         else:
-            result = steam.login(args.username, args.password, args.login_key, args.auth_code, args.two_factor_code,
-                                 int(args.login_id) if args.login_id else None)
+            result = SteamClient.login(args.username, args.password, steam.login_key, args.auth_code, args.two_factor_code,
+                                 int(args.login_id) if args.login_id else None) 
     if result != EResult.OK:
         log.error(f'Login failure reason: {result.__repr__()}')
         exit(result)
@@ -275,7 +490,7 @@ def main(args=None):
                         manifest_gid = manifest_gid.get('gid')
                     if not isinstance(manifest_gid, str):
                         continue
-                    result_list.append(gevent.spawn(get_manifest, cdn, app_id, depot_id, manifest_gid, args.remove_old))
+                    result_list.append(gevent.spawn(get_manifest, cdn, app_id, depot_id,app,manifest_gid, args.remove_old))
                     gevent.idle()
     try:
         gevent.joinall(result_list)

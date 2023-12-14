@@ -152,16 +152,18 @@ def get_app_info(repo):
 
 def export_xlsx(save_path='.'):
     save_path = Path(save_path).absolute()
+    appuserlist = MyJson(save_path / 'appuserlist.json')
     workbook = Workbook()
     workbook.remove(workbook.worksheets[0])
     ws = workbook.create_sheet('游戏')
-    ws.append(['app id', '游戏名', '中文名', '标签', '类型', '评分', '发行日期', '简介'])
+    #添加读取appuserlist中对应游戏id的所有账号到标签1
+    ws.append(['账号','app id', '游戏名', '中文名', '标签', '类型', '评分', '发行日期', '简介'])
     for i, info in sorted(MyJson('xiaoheihe.json').items(), key=lambda x: int(x[0])):
         try:
-            ws.append([i, info['name'], info['cname'], ','.join(info['tags']), info['type'], info['score'],
+            ws.append([appuserlist.get(i, ''),i, info['name'], info['cname'], ','.join(info['tags']), info['type'], info['score'],
                        info['release_date'], info['about']])
         except IllegalCharacterError:
-            ws.append([i, info['name'], info['cname'], ','.join(info['tags']), info['type'], info['score'],
+            ws.append([appuserlist.get(i, ''),i, info['name'], info['cname'], ','.join(info['tags']), info['type'], info['score'],
                        info['release_date'], ILLEGAL_CHARACTERS_RE.sub('', info['about'])])
     if save_path.is_dir():
         save_path = save_path / 'apps.xlsx'
@@ -169,7 +171,7 @@ def export_xlsx(save_path='.'):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-r', '--repo', default='https://github.com/liaofulong/Manifest-AutoUpdate')
+parser.add_argument('-r', '--repo', default='https://github.com/BlankTMing/SteamManifestCache')
 parser.add_argument('-o', '--output', default='.')
 logging.basicConfig(format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s',
                     level=logging.INFO)

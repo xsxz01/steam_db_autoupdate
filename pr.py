@@ -63,29 +63,24 @@ class Pr:
         self.repo.git.remote('add', 'source', self.source_repo)
 
     def get_refs_list(self, repo=None):
-        app_set = set()
-        tag_set = set()
-        tag_dict = {}
+        app_list = []
+        tag_list = []
         if repo:
             result = self.repo.git.ls_remote(repo)
         else:
-            result = self.repo.git.for_each_ref('--sort=-committerdate')
+            result = self.repo.git.ls_remote()
         for i in result.split('\n'):
             if i:
-                refs = i.split()[-1]
+                sha, refs = i.split()
                 name = refs.split('/')[-1]
-                if refs.startswith('refs/heads/') or refs.startswith('refs/remotes/'):
+                if refs.startswith('refs/heads/'):
                     if name.isdecimal():
                         app_id = int(name)
-                        app_set.add(app_id)
+                        app_list.append(app_id)
                 elif refs.startswith('refs/tags/'):
                     if '_' in name:
-                        tag_set.add(name)
-                        depot_id, manifest_gid = name.split('_')
-                        if depot_id in tag_dict:
-                            continue
-                        tag_dict[depot_id] = name
-        return list(app_set), list(tag_set) if repo else list(tag_dict.values())
+                        tag_list.append(name)
+        return app_list, tag_list
 
     def contains(self, tag):
         try:
@@ -143,7 +138,7 @@ class Pr:
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-r', '--repo', default='https://github.com/liaofulong/Manifest-AutoUpdate')
+parser.add_argument('-r', '--repo', default='https://github.com/BlankTMing/SteamManifestCache')
 parser.add_argument('-t', '--token')
 parser.add_argument('-l', '--level', default='INFO')
 

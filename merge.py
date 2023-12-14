@@ -243,8 +243,6 @@ class Merge:
         for i in self.pr_list:
             try:
                 num, app_id = i['number'], str(i['head']['ref'])
-                if app_id == 'pr':
-                    app_id = i['title']
                 if not app_id.isdecimal():
                     continue
                 self.author_name = i['user']['login']

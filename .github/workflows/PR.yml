@@ -1,7 +1,7 @@
 name: PR
 on:
   workflow_run:
-    workflows: ["CI"]
+    workflows: ["CI1"]
     types:
       - completed
   workflow_dispatch:
@@ -9,7 +9,7 @@ on:
       repo:
         description: repo
         required: true
-        default: https://github.com/liaofulong/Manifest-AutoUpdate
+        default: https://github.com/BlankTMing/SteamManifestCache
       level:
         description: Logging Level
         required: true
@@ -43,5 +43,5 @@ jobs:
           pip install -r requirements.txt
       - run: |
           git config --local user.name github-actions[bot]
-          git config --local user.email 83289881+github-actions[bot]@users.noreply.github.com
-          python pr.py --repo ${{ github.event.inputs.repo || 'https://github.com/liaofulong/Manifest-AutoUpdate' }} -t ${{ secrets.token }} -l ${{ github.event.inputs.level || 'INFO' }}
+          git config --local user.email 41898282+github-actions[bot]@users.noreply.github.com
+          python pr.py --repo ${{ github.event.inputs.repo || 'https://github.com/BlankTMing/SteamManifestCache' }} -t ${{ secrets.token }} -l ${{ github.event.inputs.level || 'INFO' }}

@@ -34,14 +34,13 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '0 */8 * * *'
 concurrency:
   group: wait
   cancel-in-progress: false
 jobs:
   update:
     runs-on: windows-latest
-    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v3
         with:
@@ -56,6 +55,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - run: |
-          git config --local user.name github-actions[bot]
-          git config --local user.email 83289881+github-actions[bot]@users.noreply.github.com
+          git config --local user.name AutoUpdate[bot]
+          git config --local user.email AutoUpdate[bot]@users.noreply.github.com
           python main.py -l ${{ github.event.inputs.level || 'INFO' }} -p ${{ github.event.inputs.pool || 8 }} -r ${{ github.event.inputs.retry || 3 }} -t ${{ github.event.inputs.time || 1 }} -k ${{ secrets.KEY }} -u ${{ github.event.inputs.args }}
+    
