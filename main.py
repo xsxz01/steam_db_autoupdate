@@ -213,17 +213,14 @@ class ManifestAutoUpdate:
             self.set_depot_info(depot_id, manifest_gid)
             app_repo = git.Repo(app_path)
             with lock:
-                #tag_name = f'{depot_id}_{manifest_gid}'
-                #if tag_name in app_repo.tags:
-                    #app_repo.delete_tag(tag_name)
                 if manifest_commit:
                     app_repo.create_tag(f'{depot_id}_{manifest_gid}', manifest_commit)
                 else:
                     if delete_list:
                         app_repo.git.rm(delete_list)
                     app_repo.git.add(f'{depot_id}_{manifest_gid}.manifest')
-                    #修改将资源Key保存到config.vdf，新增appinfo(保存app信息)，新增config.json(保存depot_id和dlc_id)
-                    app_repo.git.add('config.vdf')
+                    #修改将资源Key保存到Key.vdf，新增appinfo(保存app信息 DLC(包括独立DLC))，新增config.json(保存depot_id和dlc_id)
+                    app_repo.git.add('Key.vdf')
                     app_repo.git.add('config.json')
                     app_repo.git.add('appinfo.vdf')
                     app_repo.index.commit(f'Update depot: {depot_id}_{manifest_gid}')
@@ -397,7 +394,6 @@ class ManifestAutoUpdate:
                 self.log.debug(f'manifest_commit: {manifest_commit}')
                 return Result(result=True, app_id=app_id, depot_id=depot.depot_id, manifest_gid=depot.gid,
                               manifest_commit=manifest_commit)
-        #with lock:
         return get_manifest(cdn,app_id,appinfo,package,depot, True, self.ROOT, self.retry_num)
 
     def get_manifest(self, username, password, sentry_name=None):
@@ -459,6 +455,7 @@ class ManifestAutoUpdate:
                     continue
                 self.log.debug(f'Lock app: {app_id}')
                 self.app_lock[int(app_id)] = set()
+            #改为get_manifests获取manifests
             manifests = cdn.get_manifests(int(app_id))
             if not manifests:
                 continue
@@ -466,7 +463,6 @@ class ManifestAutoUpdate:
             app = fresh_resp['apps'][app_id]
             package = {'dlcs': [], 'packagedlcs': []}
             dlcappids = {}
-            manifestsLen = len(manifests)-1
             if 'extended' in app and 'listofdlc' in app['extended']:
                 dlc_list = list(map(int, app['extended']['listofdlc'].split(',')))
                 package['dlcs'] = dlc_list
@@ -478,16 +474,16 @@ class ManifestAutoUpdate:
                 for depotid, info in app['depots'].items():
                     if 'dlcappid' in info and 'manifests' in info:
                         dlcappids[depotid]=int(info['dlcappid'])
-            for index, depot in enumerate(manifests):
+                for depot in manifests:
+                    dlcappids.pop(str(depot.depot_id), None)
+                for value in dlcappids.values():
+                    if value in package['dlcs']:
+                         package['dlcs'].remove(value)
+            for depot in manifests:
                 depot_id = str(depot.depot_id)
                 manifest_gid = str(depot.gid)
                 self.app_lock[int(app_id)].add(depot_id)
                 self.set_depot_info(depot_id, manifest_gid)
-                dlcappids.pop(depot_id, None)
-                if index == manifestsLen:
-                    for value in dlcappids.values():
-                        if value in package['dlcs']:
-                            package['dlcs'].remove(value)
                 with lock:
                     if int(app_id) not in self.user_info[username]['app']:
                         self.user_info[username]['app'].append(int(app_id))
@@ -590,6 +586,7 @@ class ManifestAutoUpdate:
                             update_app_user[int(app_id)] = []
                         update_app_user[int(app_id)].append(user)
                         update_user_set.add(user)
+                        #导出可以账户和密码到Avalidaccountlist
                         #self.Avalidaccountlist.update({user:self.account_info[user][0]})
         self.log.debug(str(update_app_user))
         for user in self.account_info:
@@ -601,6 +598,7 @@ class ManifestAutoUpdate:
             self.appuserlist.update({app_id:",".join(user_list)})
             self.log.info(f'{app_id}: {",".join(user_list)}')
         self.appuserlist.dump()
+        #导出可以账户和密码到Avalidaccountlist
         #self.Avalidaccountlist.dump()
         self.log.info(f'{len(update_app_user)} app and {len(self.update_user_list)} users need to update!')
         return self.update_user_list

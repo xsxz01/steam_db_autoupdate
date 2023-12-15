@@ -25,7 +25,7 @@ class Depot:
 
     def get_all_depot_key(self):
         depot_key_dict = dict()
-        config_path = self.path / 'config.vdf'
+        config_path = self.path / 'KEY.vdf'
         try:
             if config_path.exists():
                 with config_path.open() as f:
@@ -78,7 +78,7 @@ class Depot:
         return depot_dict
 
     def merge_depot_key(self, depot_id, depot_key):
-        config_path = self.path / 'config.vdf'
+        config_path = self.path / 'KEY.vdf'
         if config_path.exists():
             with config_path.open() as f:
                 config = vdf.load(f)
@@ -104,7 +104,7 @@ class Depot:
         shutil.copy(manifest_path, self.path / f'{depot_id}_{manifest_gid}.manifest')
         self.merge_depot_key(depot_id, depot_key)
         self.repo.git.add(f'{depot_id}_{manifest_gid}.manifest')
-        self.repo.git.add('config.vdf')
+        self.repo.git.add('KEY.vdf')
         if author_name:
             args = ['-c', f'user.name={author_name}']
             if author_email:

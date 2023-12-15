@@ -132,8 +132,8 @@ def get_manifest(cdn, app_id,appinfo,package,manifest, remove_old=False, save_pa
     if not os.path.isfile(app_path / 'appinfo.vdf'):
         with open(app_path / 'appinfo.vdf', 'w', encoding='utf-8') as f:
             vdf.dump(appinfo, f, pretty=True)
-    if os.path.isfile(app_path / 'config.vdf'):
-        with open(app_path / 'config.vdf') as f:
+    if os.path.isfile(app_path / 'Key.vdf'):
+        with open(app_path / 'Key.vdf') as f:
             d = vdf.load(f)
     else:
         d = vdf.VDFDict({'depots': {}})
@@ -152,7 +152,7 @@ def get_manifest(cdn, app_id,appinfo,package,manifest, remove_old=False, save_pa
     manifest.metadata.crc_clear = crc32(struct.pack('<I', len(buffer)) + buffer)
     with open(manifest_path, 'wb') as f:
         f.write(manifest.serialize(compress=False))
-    with open(app_path / 'config.vdf', 'w') as f:
+    with open(app_path / 'Key.vdf', 'w') as f:
         vdf.dump(d, f, pretty=True)
     with open(app_path / 'config.json', 'w') as f:
         json.dump(config, f)
@@ -244,19 +244,6 @@ class MyCDNClient(CDNClient):
             self.fetch_content_servers()
 
         #self.load_licenses()
-
-    def has_license_for_depot(self, depot_id):
-        """ Check if there is license for depot
-
-        :param depot_id: depot ID
-        :type  depot_id: int
-        :returns: True if we have license
-        :rtype: bool
-        """
-        if depot_id in self.licensed_depot_ids:
-            return True
-        else:
-            return False
             
     def load_licenses(self):
         """Read licenses from SteamClient instance, required for determining accessible content"""
@@ -318,7 +305,7 @@ class MyCDNClient(CDNClient):
         is_enc_branch = False
 
         if branch not in depots.get('branches', {}):
-            return manifests
+            raise SteamError("No branch named %s for app_id %s" % (repr(branch), app_id))
         elif int(depots['branches'][branch].get('pwdrequired', 0)) > 0:
             is_enc_branch = True
 
