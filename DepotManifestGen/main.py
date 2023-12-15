@@ -132,8 +132,8 @@ def get_manifest(cdn, app_id,appinfo,package,manifest, remove_old=False, save_pa
     if not os.path.isfile(app_path / 'appinfo.vdf'):
         with open(app_path / 'appinfo.vdf', 'w', encoding='utf-8') as f:
             vdf.dump(appinfo, f, pretty=True)
-    if os.path.isfile(app_path / 'Key.vdf'):
-        with open(app_path / 'Key.vdf') as f:
+    if os.path.isfile(app_path / 'config.vdf'):
+        with open(app_path / 'config.vdf') as f:
             d = vdf.load(f)
     else:
         d = vdf.VDFDict({'depots': {}})
@@ -152,7 +152,7 @@ def get_manifest(cdn, app_id,appinfo,package,manifest, remove_old=False, save_pa
     manifest.metadata.crc_clear = crc32(struct.pack('<I', len(buffer)) + buffer)
     with open(manifest_path, 'wb') as f:
         f.write(manifest.serialize(compress=False))
-    with open(app_path / 'Key.vdf', 'w') as f:
+    with open(app_path / 'config.vdf', 'w') as f:
         vdf.dump(d, f, pretty=True)
     with open(app_path / 'config.json', 'w') as f:
         json.dump(config, f)
