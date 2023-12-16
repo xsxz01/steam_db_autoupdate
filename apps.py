@@ -171,7 +171,7 @@ def export_xlsx(save_path='.'):
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-r', '--repo', default='https://github.com/BlankTMing/SteamManifestCache')
+parser.add_argument('-r', '--repo', default='https://github.com/liaofulong/Manifest-AutoUpdate')
 parser.add_argument('-o', '--output', default='.')
 logging.basicConfig(format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s',
                     level=logging.INFO)

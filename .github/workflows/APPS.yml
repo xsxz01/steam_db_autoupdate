@@ -8,8 +8,8 @@ on:
         default: 'https://github.com/liaofulong/Manifest-AutoUpdate'
     branches:
       - main
-  #schedule:
-    #- cron: '0 */8 * * *'
+  schedule:
+    - cron: '0 */8 * * *'
 concurrency:
   group: wait
   cancel-in-progress: false
