@@ -1,0 +1,149 @@
+"appid" "2635410"
+"common"
+{
+	"name" "Holdfast: Nations At War - Public Testing"
+	"type" "Beta"
+	"releasestate" "released"
+	"oslist" "windows"
+	"osarch" "64"
+	"logo" "52b805b649c637a79ac538d49519dde93aab88e7"
+	"logo_small" "52b805b649c637a79ac538d49519dde93aab88e7_thumb"
+	"icon" "4a1d30894946a782014e8542884e64c25c2b062a"
+	"clienticon" "2989e76afd8818a709066847f13f193f2f100e8c"
+	"clienttga" "8a4ab1dfe945da3b6ee3d6deab7ba928e7b526ff"
+	"exfgls" "1"
+	"parent" "589290"
+	"osextended" ""
+	"small_capsule"
+	{
+		"english" "capsule_231x87.jpg"
+	}
+	"header_image"
+	{
+		"english" "header.jpg"
+	}
+	"library_assets"
+	{
+		"library_capsule" "en"
+		"library_hero" "en"
+		"library_logo" "en"
+		"logo_position"
+		{
+			"pinned_position" "BottomLeft"
+			"width_pct" "55.67239195277096"
+			"height_pct" "39.59529150651466"
+		}
+	}
+	"store_asset_mtime" "1703767596"
+	"associations"
+	{
+	}
+	"primary_genre" "0"
+	"category"
+	{
+	}
+	"steam_release_date" "1698413453"
+	"community_visible_stats" "1"
+	"workshop_visible" "1"
+	"community_hub_visible" "1"
+	"gameid" "2635410"
+}
+"config"
+{
+	"installdir" "Holdfast Nations At War - Beta"
+	"launch"
+	{
+		"0"
+		{
+			"executable" "Holdfast NaW.exe"
+			"arguments" "-beta"
+			"config"
+			{
+				"oslist" "windows"
+				"osarch" "64"
+			}
+		}
+	}
+}
+"depots"
+{
+	"hasdepotsindlc" "1"
+	"2635411"
+	{
+		"config"
+		{
+			"oslist" "windows"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "1454474737687646659"
+				"size" "18176512552"
+				"download" "6555370400"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"closed"
+			{
+				"gid" "0F2E2AB46A0768AA78A2C2EB69156805"
+				"size" "E0BA542F548195AA86C92F166EC43158"
+				"download" "97F7D8121D797ED745B43A868E79FC5C"
+			}
+			"staging"
+			{
+				"gid" "BD988D63998057CF01E6F9F80CA11F24"
+				"size" "40E12764D86193373F3EDBE29FAB7967"
+				"download" "319CCCED73559DE24401FF97EA87C130"
+			}
+		}
+	}
+	"workshopdepot" "2635410"
+	"branches"
+	{
+		"public"
+		{
+			"buildid" "13091109"
+			"timeupdated" "1704374852"
+		}
+		"closed"
+		{
+			"buildid" "13091109"
+			"pwdrequired" "1"
+			"timeupdated" "1704374836"
+		}
+		"staging"
+		{
+			"buildid" "13128063"
+			"pwdrequired" "1"
+			"timeupdated" "1704815692"
+		}
+	}
+}
+"ufs"
+{
+	"quota" "5368709120"
+	"maxnumfiles" "250"
+	"hidecloudui" "1"
+	"ignoreexternalfiles" "1"
+	"appidredirect" "589290"
+}
+"localization"
+{
+	"richpresence"
+	{
+		"english"
+		{
+			"tokens"
+			{
+				"#status_playing" "Playing on %server%"
+				"#status_atmainmenu" "Browsing Main Menu"
+			}
+		}
+	}
+}
+"_missing_token" "False"
+"_change_number" "21819648"
+"_sha" "cb99e0910b2be719919da26c8287f9ddf50997cf"
+"_size" "2666"
