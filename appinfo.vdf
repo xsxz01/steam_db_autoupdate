@@ -1,0 +1,468 @@
+"appid" "383120"
+"common"
+{
+	"name" "Empyrion - Galactic Survival"
+	"type" "Game"
+	"oslist" "windows"
+	"clienttga" "9896b6b44c8ce6aa9779596098187a873e9db1e1"
+	"icon" "ef7a39a74922aa667d685419064e37c6166b911e"
+	"clienticon" "1c45c3bdade43a2af61b8ef75070956b0b76ea7b"
+	"logo" "ee68f82c0a6daf2101781478c314aa456822868d"
+	"logo_small" "ee68f82c0a6daf2101781478c314aa456822868d_thumb"
+	"releasestate" "released"
+	"eulas"
+	{
+		"0"
+		{
+			"id" "383120_eula_0"
+			"name" "Empyrion - Galactic Survival EULA"
+			"url" "https://store.steampowered.com//eula/383120_eula_0"
+		}
+	}
+	"osarch" "64"
+	"osextended" ""
+	"steam_deck_compatibility"
+	{
+		"category" "2"
+		"test_timestamp" "1694736000"
+		"tested_build_id" "12051553"
+		"tests"
+		{
+			"0"
+			{
+				"display" "3"
+				"token" "#SteamDeckVerified_TestResult_DefaultControllerConfigNotFullyFunctional"
+			}
+			"1"
+			{
+				"display" "3"
+				"token" "#SteamDeckVerified_TestResult_ControllerGlyphsDoNotMatchDeckDevice"
+			}
+			"2"
+			{
+				"display" "3"
+				"token" "#SteamDeckVerified_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+			}
+			"3"
+			{
+				"display" "3"
+				"token" "#SteamDeckVerified_TestResult_DefaultConfigurationIsNotPerformant"
+			}
+			"4"
+			{
+				"display" "4"
+				"token" "#SteamDeckVerified_TestResult_InterfaceTextIsLegible"
+			}
+		}
+		"configuration"
+		{
+			"supported_input" "gamepad"
+			"requires_manual_keyboard_invoke" "1"
+			"requires_non_controller_launcher_nav" "0"
+			"primary_player_is_controller_slot_0" "0"
+			"non_deck_display_glyphs" "1"
+			"small_text" "0"
+			"requires_internet_for_setup" "0"
+			"requires_internet_for_singleplayer" "0"
+			"recommended_runtime" "proton-8.0-4"
+			"requires_h264" "0"
+			"gamescope_frame_limiter_not_supported" "0"
+			"proton_compat_config" "gamedrive,"
+		}
+	}
+	"metacritic_name" "Empyrion - Galactic Survival"
+	"controller_support" "partial"
+	"small_capsule"
+	{
+		"english" "capsule_231x87.jpg"
+	}
+	"header_image"
+	{
+		"english" "header.jpg"
+	}
+	"library_assets"
+	{
+		"library_capsule" "en"
+		"library_hero" "en"
+		"library_logo" "en"
+		"logo_position"
+		{
+			"pinned_position" "UpperCenter"
+			"width_pct" "55.07565537994992"
+			"height_pct" "40.03948652998757"
+		}
+	}
+	"store_asset_mtime" "1700647949"
+	"associations"
+	{
+		"0"
+		{
+			"type" "developer"
+			"name" "Eleon Game Studios"
+		}
+		"1"
+		{
+			"type" "publisher"
+			"name" "Eleon Game Studios"
+		}
+	}
+	"primary_genre" "23"
+	"genres"
+	{
+		"0" "25"
+		"1" "23"
+		"2" "28"
+		"3" "2"
+	}
+	"category"
+	{
+		"category_2" "1"
+		"category_9" "1"
+		"category_1" "1"
+		"category_30" "1"
+		"category_18" "1"
+		"category_38" "1"
+		"category_49" "1"
+		"category_36" "1"
+		"category_48" "1"
+		"category_45" "1"
+		"category_46" "1"
+	}
+	"supported_languages"
+	{
+		"english"
+		{
+			"supported" "true"
+		}
+		"german"
+		{
+			"supported" "true"
+		}
+		"french"
+		{
+			"supported" "true"
+		}
+		"russian"
+		{
+			"supported" "true"
+		}
+		"italian"
+		{
+			"supported" "true"
+		}
+		"brazilian"
+		{
+			"supported" "true"
+		}
+		"schinese"
+		{
+			"supported" "true"
+		}
+		"greek"
+		{
+			"supported" "true"
+		}
+	}
+	"original_release_date" "1596610800"
+	"steam_release_date" "1596621376"
+	"workshop_visible" "1"
+	"community_hub_visible" "1"
+	"gameid" "383120"
+	"store_tags"
+	{
+		"0" "599"
+		"1" "1685"
+		"2" "1100689"
+		"3" "1755"
+		"4" "1662"
+		"5" "1643"
+		"6" "1695"
+		"7" "3834"
+		"8" "16598"
+		"9" "1732"
+		"10" "3810"
+		"11" "3968"
+		"12" "3859"
+		"13" "4182"
+		"14" "3942"
+		"15" "6730"
+		"16" "1775"
+		"17" "1702"
+		"18" "9"
+		"19" "1663"
+	}
+	"review_score" "8"
+	"review_percentage" "80"
+}
+"extended"
+{
+	"developer" "Eleon Game Studios"
+	"publisher" "Eleon Game Studios"
+	"homepage" "http://empyriongame.com"
+	"listofdlc" "2765930"
+	"dlcavailableonstore" "1"
+}
+"config"
+{
+	"contenttype" "3"
+	"installdir" "Empyrion - Galactic Survival"
+	"launch"
+	{
+		"0"
+		{
+			"executable" "EmpyrionLauncher.exe"
+			"description" "Launch"
+			"type" "none"
+			"config"
+			{
+				"oslist" "windows"
+				"osarch" "64"
+			}
+		}
+	}
+}
+"depots"
+{
+	"workshopdepot" "383120"
+	"hasdepotsindlc" "1"
+	"228988"
+	{
+		"config"
+		{
+			"oslist" "windows"
+		}
+		"depotfromapp" "228980"
+		"sharedinstall" "1"
+	}
+	"383121"
+	{
+		"config"
+		{
+			"oslist" "windows"
+			"osarch" "64"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "5123863404018975384"
+				"size" "16829868044"
+				"download" "9441319152"
+			}
+			"alpha10"
+			{
+				"gid" "8179705152781381799"
+				"size" "9837442396"
+				"download" "4848589744"
+			}
+			"alpha11"
+			{
+				"gid" "4362701615264319485"
+				"size" "9716269595"
+				"download" "4870599136"
+			}
+			"alpha12"
+			{
+				"gid" "1943208745954422153"
+				"size" "10755412160"
+				"download" "5368618336"
+			}
+			"alpha6"
+			{
+				"gid" "383489724624972720"
+				"size" "4282082918"
+				"download" "1715410688"
+			}
+			"alpha7"
+			{
+				"gid" "5539292244395393780"
+				"size" "8287403988"
+				"download" "3424596448"
+			}
+			"alpha8"
+			{
+				"gid" "6689755464083908421"
+				"size" "8332120299"
+				"download" "3754050448"
+			}
+			"alpha9"
+			{
+				"gid" "4532113771825280900"
+				"size" "9128180753"
+				"download" "3985802592"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"alpha5"
+			{
+				"gid" "A332D9F08D06CCCC40F106894AAEC9BE"
+				"size" "2F32ACA48DE848BCD5070BD549A5D5B4"
+				"download" "8065D9BAB49D2BBCF53CC354235DCBCB"
+			}
+			"closedalpha"
+			{
+				"gid" "631D8E30AF2B29450E127D957D2B42D4"
+				"size" "D7FCAB3C37A4DCCE0D2F75AFA02DD093"
+				"download" "5BAEC560036C7C5DEC727080E409F03F"
+			}
+			"eleononly"
+			{
+				"gid" "E57D189AE5BBF3994E1BFE43D16B5D5B"
+				"size" "7FDF544B159CC84ED530F1F3B216EF55"
+				"download" "88E03DB7C13628F2D1D0A517A058049C"
+			}
+			"eleontest"
+			{
+				"gid" "6021A046A5C84A1B05E3764B51A375BE"
+				"size" "4B10054FA3E3F6B394AF15DBFB4A8EC9"
+				"download" "F55834CF68677DD61D2DD51E44B61C0B"
+			}
+			"experimental"
+			{
+				"gid" "72D29C1D0A4F76BBBE0A5FFF10F63F2A"
+				"size" "362A2CF486B72D42F275F4EDC8E4115E"
+				"download" "C368D84F44FB8B0E98094AC6C5BEA61F"
+			}
+			"internal"
+			{
+				"gid" "73A2F80645D6E1F5CF94A5083370A628"
+				"size" "AC66C7C2E2DE1D1F73250B97F1274810"
+				"download" "009BDFED053FD7183B89CDA33CD517B9"
+			}
+			"internal2"
+			{
+				"gid" "144DA5E085A5D74EF2D772B62240440B"
+				"size" "F31F593F5E27BF89FFA800D8FE48E3E3"
+				"download" "123F9087257B3F9768257128465D21F6"
+			}
+			"steamtest"
+			{
+				"gid" "C1107DC68FD9E44E9D5FC8B605E12CE1"
+				"size" "4E11C48E0EF691DB0C59AAF68F72C780"
+				"download" "BBD1FA4EEACF7C8BD5BB5A3B826F9A15"
+			}
+			"steamtest2"
+			{
+				"gid" "997277E84A4D8D4E796720E939111ADD"
+				"size" "0050DA2597F84A2B8924E8C10A350155"
+				"download" "1849C389A30D6FCD7FC5B4C3993D4466"
+			}
+		}
+	}
+	"branches"
+	{
+		"public"
+		{
+			"buildid" "13002675"
+			"timeupdated" "1703067483"
+		}
+		"alpha10"
+		{
+			"buildid" "6475091"
+			"description" "Archive: Alpha 10"
+			"timeupdated" "1617273839"
+		}
+		"alpha11"
+		{
+			"buildid" "6475239"
+			"description" "Archive: Alpha 11"
+			"timeupdated" "1617273851"
+		}
+		"alpha12"
+		{
+			"buildid" "6475389"
+			"description" "Archive: Alpha 12"
+			"timeupdated" "1617273867"
+		}
+		"alpha5"
+		{
+			"buildid" "1664271"
+			"pwdrequired" "1"
+			"timeupdated" "1596204988"
+		}
+		"alpha6"
+		{
+			"buildid" "2145112"
+			"description" "Archive: Alpha 6"
+			"timeupdated" "1508405747"
+		}
+		"alpha7"
+		{
+			"buildid" "2535890"
+			"description" "Archive: Alpha 7"
+			"timeupdated" "1528720067"
+		}
+		"alpha8"
+		{
+			"buildid" "3313725"
+			"description" "Archive: Alpha 8"
+			"timeupdated" "1545046751"
+		}
+		"alpha9"
+		{
+			"buildid" "3799908"
+			"description" "Archive: Alpha 9"
+			"timeupdated" "1587836017"
+		}
+		"closedalpha"
+		{
+			"buildid" "13057581"
+			"pwdrequired" "1"
+			"timeupdated" "1703777511"
+		}
+		"eleononly"
+		{
+			"buildid" "13126768"
+			"pwdrequired" "1"
+			"timeupdated" "1704806112"
+		}
+		"eleontest"
+		{
+			"buildid" "13126767"
+			"pwdrequired" "1"
+			"timeupdated" "1704807168"
+		}
+		"experimental"
+		{
+			"buildid" "12942001"
+			"pwdrequired" "1"
+			"timeupdated" "1702401188"
+		}
+		"internal"
+		{
+			"buildid" "13103078"
+			"pwdrequired" "1"
+			"timeupdated" "1704483313"
+		}
+		"internal2"
+		{
+			"buildid" "13032518"
+			"pwdrequired" "1"
+			"timeupdated" "1703276965"
+		}
+		"steamtest"
+		{
+			"buildid" "13002675"
+			"pwdrequired" "1"
+			"timeupdated" "1704800882"
+		}
+		"steamtest2"
+		{
+			"buildid" "13057582"
+			"pwdrequired" "1"
+			"timeupdated" "1704376187"
+		}
+	}
+}
+"ufs"
+{
+	"quota" "100000000"
+	"maxnumfiles" "200"
+	"hidecloudui" "1"
+	"ignoreexternalfiles" "1"
+}
+"_missing_token" "False"
+"_change_number" "21831601"
+"_sha" "3fc6ff574701d044c39b0aa25a3785955fc34e33"
+"_size" "9143"
