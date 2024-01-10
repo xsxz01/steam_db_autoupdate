@@ -1,0 +1,903 @@
+"appid" "611790"
+"common"
+{
+	"name" "House Party"
+	"type" "Game"
+	"releasestate" "released"
+	"oslist" "windows"
+	"osarch" "64"
+	"logo" "e544275068dfc0dd9c2ed676ea0217046cfce6f4"
+	"logo_small" "e544275068dfc0dd9c2ed676ea0217046cfce6f4_thumb"
+	"icon" "ba90873a010477342a3286a2152f5ab6648028ed"
+	"clienttga" "6012ea81d68607ad0dfc5610e61f17101373c1fd"
+	"linuxclienticon" "bfe2c2f51c943ecd306ad607a4b692fb87448b2a"
+	"clienticns" "bfe2c2f51c943ecd306ad607a4b692fb87448b2a"
+	"clienticon" "d82cb1a8cff0d48b586fae2204bbdc71e64afdd4"
+	"osextended" ""
+	"content_descriptors"
+	{
+		"0" "1"
+		"1" "5"
+	}
+	"has_adult_content" "1"
+	"has_adult_content_sex" "1"
+	"steam_deck_compatibility"
+	{
+		"category" "2"
+		"test_timestamp" "1663977600"
+		"tested_build_id" "9546180"
+		"tests"
+		{
+			"0"
+			{
+				"display" "3"
+				"token" "#SteamDeckVerified_TestResult_ControllerGlyphsDoNotMatchDeckDevice"
+			}
+			"1"
+			{
+				"display" "3"
+				"token" "#SteamDeckVerified_TestResult_InterfaceTextIsNotLegible"
+			}
+			"2"
+			{
+				"display" "3"
+				"token" "#SteamDeckVerified_TestResult_DefaultConfigurationIsNotPerformant"
+			}
+			"3"
+			{
+				"display" "4"
+				"token" "#SteamDeckVerified_TestResult_DefaultControllerConfigFullyFunctional"
+			}
+		}
+		"configuration"
+		{
+			"supported_input" "gamepad"
+			"requires_manual_keyboard_invoke" "0"
+			"requires_non_controller_launcher_nav" "0"
+			"primary_player_is_controller_slot_0" "0"
+			"non_deck_display_glyphs" "1"
+			"small_text" "1"
+			"requires_internet_for_setup" "0"
+			"requires_internet_for_singleplayer" "0"
+			"recommended_runtime" "proton-stable"
+			"requires_h264" "0"
+			"gamescope_frame_limiter_not_supported" "0"
+		}
+	}
+	"controller_support" "full"
+	"small_capsule"
+	{
+		"english" "capsule_231x87.jpg"
+	}
+	"header_image"
+	{
+		"english" "header.jpg"
+	}
+	"library_assets"
+	{
+		"library_capsule" "en"
+		"library_hero" "en"
+		"library_logo" "en"
+		"library_header" "en"
+		"logo_position"
+		{
+			"pinned_position" "BottomLeft"
+			"width_pct" "37.81381324682531"
+			"height_pct" "58.884615541040525"
+		}
+	}
+	"store_asset_mtime" "1703122364"
+	"associations"
+	{
+		"0"
+		{
+			"type" "developer"
+			"name" "Eek! Games, LLC"
+		}
+		"1"
+		{
+			"type" "publisher"
+			"name" "Eek! Games, LLC"
+		}
+		"2"
+		{
+			"type" "franchise"
+			"name" "House Party"
+		}
+	}
+	"primary_genre" "25"
+	"genres"
+	{
+		"0" "25"
+		"1" "4"
+		"2" "23"
+		"3" "3"
+		"4" "28"
+	}
+	"category"
+	{
+		"category_2" "1"
+		"category_29" "1"
+		"category_33" "1"
+		"category_22" "1"
+		"category_13" "1"
+		"category_28" "1"
+		"category_23" "1"
+	}
+	"supported_languages"
+	{
+		"english"
+		{
+			"supported" "true"
+			"full_audio" "true"
+			"subtitles" "true"
+		}
+		"schinese"
+		{
+			"subtitles" "true"
+			"supported" "true"
+		}
+		"french"
+		{
+			"subtitles" "true"
+			"supported" "true"
+		}
+		"russian"
+		{
+			"subtitles" "true"
+			"supported" "true"
+		}
+		"latam"
+		{
+			"subtitles" "true"
+			"supported" "true"
+		}
+		"german"
+		{
+			"supported" "true"
+		}
+		"turkish"
+		{
+			"supported" "true"
+		}
+		"italian"
+		{
+			"subtitles" "true"
+			"supported" "true"
+		}
+		"polish"
+		{
+			"supported" "true"
+			"subtitles" "true"
+		}
+	}
+	"steam_release_date" "1657929792"
+	"community_visible_stats" "1"
+	"community_hub_visible" "1"
+	"gameid" "611790"
+	"store_tags"
+	{
+		"0" "6650"
+		"1" "5611"
+		"2" "24904"
+		"3" "599"
+		"4" "6426"
+		"5" "3810"
+		"6" "1742"
+		"7" "21"
+		"8" "1719"
+		"9" "12095"
+		"10" "1664"
+		"11" "6971"
+		"12" "4145"
+		"13" "5984"
+		"14" "4191"
+		"15" "4486"
+		"16" "44868"
+		"17" "10235"
+		"18" "4182"
+		"19" "7208"
+	}
+	"review_score" "8"
+	"review_percentage" "86"
+}
+"extended"
+{
+	"developer" "Eek! Games, LLC"
+	"publisher" "Eek! Games, LLC"
+	"homepage" "https://housepartygame.com"
+	"listofdlc" "944540,1524910,1648810,2229630,2229631,2363800"
+	"dlcavailableonstore" "1"
+}
+"config"
+{
+	"installdir" "House Party"
+	"launch"
+	{
+		"0"
+		{
+			"executable" "HouseParty.exe"
+			"description" "Play"
+			"type" "none"
+			"config"
+			{
+				"oslist" "windows"
+			}
+		}
+	}
+}
+"depots"
+{
+	"baselanguages" "english"
+	"611791"
+	{
+		"config"
+		{
+			"oslist" "windows"
+			"osarch" "64"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "3575501837214215204"
+				"size" "3975035742"
+				"download" "2588527040"
+			}
+			"0.19.4"
+			{
+				"gid" "7975763465394150722"
+				"size" "5249724412"
+				"download" "2425204416"
+			}
+			"0.20.3"
+			{
+				"gid" "1193688729146593270"
+				"size" "6658073292"
+				"download" "2804335264"
+			}
+			"0.21.1"
+			{
+				"gid" "2518102836824174872"
+				"size" "7946826651"
+				"download" "3054972720"
+			}
+			"0.21.2"
+			{
+				"gid" "7428628226245717596"
+				"size" "7976390855"
+				"download" "3082161472"
+			}
+			"0.22.0"
+			{
+				"gid" "3280789850159387378"
+				"size" "8027664050"
+				"download" "3108555792"
+			}
+			"1.0.0"
+			{
+				"gid" "7222763957871523933"
+				"size" "9083838087"
+				"download" "3467822992"
+			}
+			"1.0.1"
+			{
+				"gid" "8476990980101034977"
+				"size" "6601592675"
+				"download" "3226896320"
+			}
+			"1.0.2.2"
+			{
+				"gid" "8381557093751824149"
+				"size" "6562458017"
+				"download" "3290505408"
+			}
+			"1.0.3"
+			{
+				"gid" "365280720765813145"
+				"size" "6563136174"
+				"download" "3290412640"
+			}
+			"1.0.6"
+			{
+				"gid" "1398174619293544239"
+				"size" "6583364984"
+				"download" "3297393520"
+			}
+			"1.0.9"
+			{
+				"gid" "5799788795594962060"
+				"size" "6840225659"
+				"download" "3401588976"
+			}
+			"1.2.2.1"
+			{
+				"gid" "4934598709747119154"
+				"size" "7566634999"
+				"download" "3768302880"
+			}
+			"testing"
+			{
+				"gid" "3575501837214215204"
+				"size" "3975035742"
+				"download" "2588527040"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"internal"
+			{
+				"gid" "981838019100AECF62914A4AAC3D9887"
+				"size" "740197DF1CFB66723F65F443A3E3FB3A"
+				"download" "03C39D626D81D49C229169B88806B692"
+			}
+			"staging"
+			{
+				"gid" "FA05B17A5FFC54E77ABFD2F1E5287090"
+				"size" "B4069CCFB2A15288FFE497C9162BA684"
+				"download" "22E8AF3CF46963711A41487A582E23C1"
+			}
+			"sutesting"
+			{
+				"gid" "09DFC25258DC6376CB953496BAEF18BB"
+				"size" "2069050322DB44FF84355C6AB7C62695"
+				"download" "E0C3C2BCFF6FDF211F2BA263C4DB15DC"
+			}
+		}
+	}
+	"611799"
+	{
+		"config"
+		{
+			"oslist" "windows"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "3625854275280478153"
+				"size" "222784180"
+				"download" "10620752"
+			}
+			"1.0.0"
+			{
+				"gid" "2999265755559696544"
+				"size" "168636992"
+				"download" "8389536"
+			}
+			"1.0.1"
+			{
+				"gid" "5493520664279790890"
+				"size" "168832204"
+				"download" "8452368"
+			}
+			"1.0.2.2"
+			{
+				"gid" "1561194570568737439"
+				"size" "173389373"
+				"download" "8576608"
+			}
+			"1.0.3"
+			{
+				"gid" "802194371260691235"
+				"size" "174407852"
+				"download" "8783104"
+			}
+			"1.0.6"
+			{
+				"gid" "6108140526380682206"
+				"size" "179429732"
+				"download" "8844416"
+			}
+			"1.0.9"
+			{
+				"gid" "7195840832226074296"
+				"size" "195022381"
+				"download" "9134960"
+			}
+			"1.2.2.1"
+			{
+				"gid" "5626840104005210709"
+				"size" "205361060"
+				"download" "9430384"
+			}
+			"testing"
+			{
+				"gid" "3625854275280478153"
+				"size" "222784180"
+				"download" "10620752"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"internal"
+			{
+				"gid" "0C9D38CC8DBAA2FBDDC98ADAB2ACDADB"
+				"size" "B8866477CF64A7E927B4634DE74800A4"
+				"download" "5F026B3CC0373EFCDFA88F0F52931855"
+			}
+			"staging"
+			{
+				"gid" "5F9DB07F76609C44E1E184E69ABDDDDC"
+				"size" "F8AB4B708ABFC2539EC64B8C99B45075"
+				"download" "3DB452F9ACF0213BE92FC44F2FC73286"
+			}
+			"sutesting"
+			{
+				"gid" "FFC61385889B04D297BDF2C6DADCD1CA"
+				"size" "52996CDA5B88CDB0F17FB49B2807830A"
+				"download" "F64FC03B126D3E60FCA356977B48BB10"
+			}
+		}
+	}
+	"944540"
+	{
+		"dlcappid" "944540"
+		"config"
+		{
+			"oslist" "windows"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "4221351838046519298"
+				"size" "1145747872"
+				"download" "1042807872"
+			}
+			"0.19.4"
+			{
+				"gid" "1811577398040335252"
+				"size" "279975560"
+				"download" "245997696"
+			}
+			"0.20.3"
+			{
+				"gid" "3819717864755357851"
+				"size" "272212722"
+				"download" "239828928"
+			}
+			"0.21.1"
+			{
+				"gid" "2092121872829992257"
+				"size" "266922137"
+				"download" "235044032"
+			}
+			"0.21.2"
+			{
+				"gid" "6384936323267597621"
+				"size" "277923111"
+				"download" "244762976"
+			}
+			"0.22.0"
+			{
+				"gid" "7919424595373109479"
+				"size" "277923111"
+				"download" "244762976"
+			}
+			"1.0.0"
+			{
+				"gid" "6159378932866019107"
+				"size" "277985681"
+				"download" "244790288"
+			}
+			"1.0.1"
+			{
+				"gid" "4936483548209789819"
+				"size" "277985682"
+				"download" "244790288"
+			}
+			"1.0.2.2"
+			{
+				"gid" "3104533850937602185"
+				"size" "277985693"
+				"download" "244790272"
+			}
+			"1.0.3"
+			{
+				"gid" "3104533850937602185"
+				"size" "277985693"
+				"download" "244790272"
+			}
+			"1.0.6"
+			{
+				"gid" "3104533850937602185"
+				"size" "277985693"
+				"download" "244790272"
+			}
+			"1.0.9"
+			{
+				"gid" "3104533850937602185"
+				"size" "277985693"
+				"download" "244790272"
+			}
+			"1.2.2.1"
+			{
+				"gid" "3505777920964375386"
+				"size" "302129875"
+				"download" "265971344"
+			}
+			"testing"
+			{
+				"gid" "4221351838046519298"
+				"size" "1145747872"
+				"download" "1042807872"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"internal"
+			{
+				"gid" "966D0FBEC3CD71FD24153C3A7B305F43"
+				"size" "CC5DDB34AD95C33012DAB45DA5CB4429"
+				"download" "AF08F443668F2717AE563BC39C021544"
+			}
+			"staging"
+			{
+				"gid" "C2AA28A99A3BE10538A788F0428C3DD6"
+				"size" "8477AB75CEAA1035EFAC0D3D39A15C70"
+				"download" "AC44E74271ED743D49EF86FC4D01B35A"
+			}
+			"sutesting"
+			{
+				"gid" "19856628B00AFD00F4C27E5736626BC1"
+				"size" "A3533EF0AB6F0EC57E85735C6ED84CFE"
+				"download" "BEEEF83BAE391C9248E7C9703789108B"
+			}
+		}
+	}
+	"1648810"
+	{
+		"dlcappid" "1648810"
+		"config"
+		{
+			"oslist" "windows"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "899613100785390675"
+				"size" "269976522"
+				"download" "232209056"
+			}
+			"1.0.1"
+			{
+				"gid" "6946515693346866611"
+				"size" "229263380"
+				"download" "160323104"
+			}
+			"1.0.2.2"
+			{
+				"gid" "8077856027345489439"
+				"size" "238473044"
+				"download" "168756528"
+			}
+			"1.0.3"
+			{
+				"gid" "5681208775470604050"
+				"size" "238442722"
+				"download" "168568560"
+			}
+			"1.0.6"
+			{
+				"gid" "165997786209622241"
+				"size" "238444139"
+				"download" "168559360"
+			}
+			"1.0.9"
+			{
+				"gid" "4403444958738738487"
+				"size" "239020331"
+				"download" "168570928"
+			}
+			"1.2.2.1"
+			{
+				"gid" "6513404556658593564"
+				"size" "239124607"
+				"download" "168583440"
+			}
+			"testing"
+			{
+				"gid" "899613100785390675"
+				"size" "269976522"
+				"download" "232209056"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"internal"
+			{
+				"gid" "C34D479578E1D6797F77836E940BAA8D"
+				"size" "D0AFDA428D389EBAC92E5B79444D8437"
+				"download" "3EC42F8E3C652A9B88D5DDF9AAE94119"
+			}
+			"staging"
+			{
+				"gid" "E9F4004718734AF670597B0C536510CD"
+				"size" "02048BCA07317141539AECFF7F3FE589"
+				"download" "A5B3E472432A36260DFD3AA2CA2DFC56"
+			}
+			"sutesting"
+			{
+				"gid" "D5C8FD96893C95D24AC24BBA9B359D71"
+				"size" "D63BB1A7EFB57D4C8AF1177BD00E6376"
+				"download" "79E4D74AD658226946B7DCFAAF425BDD"
+			}
+		}
+	}
+	"1524910"
+	{
+		"dlcappid" "1524910"
+		"config"
+		{
+			"oslist" "windows"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "288765763208388539"
+				"size" "442363550"
+				"download" "390679424"
+			}
+			"1.2.2.1"
+			{
+				"gid" "815784567721648511"
+				"size" "137047361"
+				"download" "112045424"
+			}
+			"testing"
+			{
+				"gid" "288765763208388539"
+				"size" "442363550"
+				"download" "390679424"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"internal"
+			{
+				"gid" "623214D0DD89A661238357AE9C8547E0"
+				"size" "6CF63B27858779616553F8489A7C6035"
+				"download" "CD6C235E1395884D310CBE48B53BF25C"
+			}
+			"sutesting"
+			{
+				"gid" "1E83886E3DB8302BB70175AD9DBE41DC"
+				"size" "6BC28CE7FBF836FC3C1532D245A7D585"
+				"download" "0FD49C690B9E2D5323E4D5997396E9AE"
+			}
+		}
+	}
+	"2229630"
+	{
+		"dlcappid" "2229630"
+		"config"
+		{
+			"oslist" "windows"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "7192127269953017923"
+				"size" "33912698"
+				"download" "29173232"
+			}
+			"1.2.2.1"
+			{
+				"gid" "5252700280912015863"
+				"size" "15323717"
+				"download" "13851472"
+			}
+			"testing"
+			{
+				"gid" "7192127269953017923"
+				"size" "33912698"
+				"download" "29173232"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"internal"
+			{
+				"gid" "30D13694020FD57D945F699693D79345"
+				"size" "4576565A50AEED0A2D6CD83AC3B471E2"
+				"download" "772BE382ED1E143BAEF91558EA559896"
+			}
+			"sutesting"
+			{
+				"gid" "EC8D72CB8D1B05EEA67958FE6AAAF6FC"
+				"size" "DF09512E1132F40EF22D8DCCA76FC9C3"
+				"download" "6B6B4CEA8AD86698A407C56E85315719"
+			}
+		}
+	}
+	"2229631"
+	{
+		"dlcappid" "2229631"
+		"config"
+		{
+			"oslist" "windows"
+		}
+		"manifests"
+		{
+			"public"
+			{
+				"gid" "7630659893909365325"
+				"size" "62422908"
+				"download" "54533632"
+			}
+			"1.2.2.1"
+			{
+				"gid" "4832684993118779504"
+				"size" "596510787"
+				"download" "493783680"
+			}
+			"testing"
+			{
+				"gid" "7630659893909365325"
+				"size" "62422908"
+				"download" "54533632"
+			}
+		}
+		"encryptedmanifests"
+		{
+			"internal"
+			{
+				"gid" "C850F2CEAD84541688EDA245E7F55331"
+				"size" "DD58D80B7BF081BF834002D4A2780718"
+				"download" "0DD453DC3E29F5294278203DEE92E6DA"
+			}
+			"sutesting"
+			{
+				"gid" "E0F034F68B5B0374607540F687B42FA4"
+				"size" "A871C83693EF496BF10A4C4839B73451"
+				"download" "6D230A1C84236E8A989AE3D1FCCF9538"
+			}
+		}
+	}
+	"branches"
+	{
+		"public"
+		{
+			"buildid" "13105503"
+			"timeupdated" "1704506990"
+		}
+		"0.19.4"
+		{
+			"buildid" "6764449"
+			"description" "House Party 0.19.4"
+			"timeupdated" "1622066498"
+		}
+		"0.20.3"
+		{
+			"buildid" "7742806"
+			"description" "House Party 0.20.3"
+			"timeupdated" "1637341712"
+		}
+		"0.21.1"
+		{
+			"buildid" "8035348"
+			"description" "House Party 0.21.1"
+			"timeupdated" "1642537819"
+		}
+		"0.21.2"
+		{
+			"buildid" "8426570"
+			"description" "House Party 0.21.2"
+			"timeupdated" "1648139299"
+		}
+		"0.22.0"
+		{
+			"buildid" "8560850"
+			"description" "0.22.0 FPC Disabled"
+			"timeupdated" "1649968628"
+		}
+		"1.0.0"
+		{
+			"buildid" "9373561"
+			"description" "House Party 1.0.0"
+			"timeupdated" "1662152714"
+		}
+		"1.0.1"
+		{
+			"buildid" "9541607"
+			"description" "House Party 1.0.1"
+			"timeupdated" "1663538023"
+		}
+		"1.0.2.2"
+		{
+			"buildid" "9628394"
+			"description" "House Party 1.0.2.2"
+			"timeupdated" "1666119280"
+		}
+		"1.0.3"
+		{
+			"buildid" "9893537"
+			"description" "House Party 1.0.3"
+			"timeupdated" "1667920389"
+		}
+		"1.0.6"
+		{
+			"buildid" "10178362"
+			"description" "House Party 1.0.6"
+			"timeupdated" "1671470069"
+		}
+		"1.0.9"
+		{
+			"buildid" "10766940"
+			"description" "House Party 1.0.9"
+			"timeupdated" "1679067385"
+		}
+		"1.2.2.1"
+		{
+			"buildid" "11547898"
+			"description" "House Party 1.2.2.1"
+			"timeupdated" "1703293043"
+		}
+		"internal"
+		{
+			"buildid" "13129008"
+			"pwdrequired" "1"
+			"timeupdated" "1704823483"
+		}
+		"staging"
+		{
+			"buildid" "10766940"
+			"pwdrequired" "1"
+			"timeupdated" "1678809839"
+		}
+		"sutesting"
+		{
+			"buildid" "13129008"
+			"pwdrequired" "1"
+			"timeupdated" "1704823501"
+		}
+		"testing"
+		{
+			"buildid" "13105503"
+			"description" "Public Testing Branch"
+			"timeupdated" "1704506951"
+		}
+	}
+}
+"ufs"
+{
+	"quota" "750000000"
+	"maxnumfiles" "25"
+	"savefiles"
+	{
+		"0"
+		{
+			"root" "WinAppDataLocalLow"
+			"path" "Eek/House Party/Saves"
+			"pattern" "*.save"
+		}
+		"1"
+		{
+			"root" "WinAppDataLocalLow"
+			"path" "Eek/House Party/Saves/ToolTipData"
+			"pattern" "*.ttsave"
+		}
+	}
+}
+"localization"
+{
+	"richpresence"
+	{
+		"english"
+		{
+			"tokens"
+			{
+				"#status_atmainmenu" "At the Main Menu"
+				"#status_combatwithname" "In Combat with %name%"
+			}
+		}
+	}
+}
+"_missing_token" "False"
+"_change_number" "21821274"
+"_sha" "6ac12094725368e7eb99af72398128e0877bfb4c"
+"_size" "17102"
